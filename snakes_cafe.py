@@ -1,3 +1,7 @@
+
+
+import uuid
+
 menus = {'Appetizers': {('Wings', 2.00): 0, ('Cookies', 15.00): 0,
          ('Spring Rolls', 4.00): 0, ('Rings', 4.00): 0,
          ('Crab Dip', 4.00): 0, ('Sliders', 4.00): 0},
@@ -76,6 +80,7 @@ def print_receipt():
             if count > 0:
                 print(count)
                 item_total = tuple_item[1] * count
+                print('{} {}'.format('Order ', '#' + str(uuid.uuid4())))
                 print('{} {:>2} {:>22}'.format(tuple_item[0], 'x' + str(count), '$' + str(item_total)))
         
 
