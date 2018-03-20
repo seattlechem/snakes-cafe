@@ -1,10 +1,20 @@
 if __name__ == '__main__':
 
-    menus = {'Appetizers': {'Wings': 0, 'Cookies': 0, 'Spring Rolls': 0},
-            'Entrees': {'Salmon': 0, 'Steak': 0, 'Meat Tornado': 0,
-                        'A Literal Garden': 0},
-            'Desserts': {'Ice Cream': 0, 'Cake': 0, 'Pie': 0},
-            'Drinks': {'Coffee': 0, 'Tea': 0, 'Blood of the Innocent': 0}}
+    menus = {'Appetizers': {('Wings', 2.00): 0, ('Cookies', 15.00): 0,
+                            ('Spring Rolls', 4.00): 0, ('Rings', 4.00): 0,
+                            ('Crab Dip', 4.00): 0, ('Sliders', 4.00): 0},
+             'Entrees': {('Salmon', 5.00): 0, ('Steak', 6.00): 0,
+                         ('Meat Tornado', 4.00): 0, ('A Literal Garden', 3.00): 0,
+                         ('Pasta', 4.00): 0, ('Ribs', 4.00): 0},
+             'Desserts': {('Ice Cream', 500.0): 0, ('Cake', 30.00): 0,
+                          ('Pie', 3.00): 0, ('Pudding', 4.00): 0,
+                          ('Fruit', 4.00): 0, ('Sorbet', 4.00): 0},
+             'Drinks': {('Coffee', 4.00): 0, ('Tea', 3.00): 0,
+                        ('Blood of the Innocent', 6.00): 0, ('Pop', 4.00): 0,
+                        ('Wine', 4.00): 0, ('Beer', 4.00): 0},
+             'Sides': {('Frys', 4.00): 0, ('Salad', 3.00): 0,
+                       ('Bread', 6.00): 0, ('Slaw', 4.00): 0, ('Soup', 4.00): 0,
+                       ('Rice', 4.00): 0}}
 
     print("""
     ****************************************
