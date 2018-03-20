@@ -27,17 +27,23 @@ menu_items()
 
 
 def ordering():
-    order = input(('*' * 40) + '\n' + ('*' * 2) +
+    condition = True
+    print(('*' * 40) + '\n' + ('*' * 2) +
                   '  What would you like to order?  ' + ('*' * 2) + '\n' +
-                  ('*' * 40) +  'Enter quit any time to exit' + '\n' + '>' + '\t')
-    order = order.title()
-    for _, order_count in menus.items():
-        for item in order_count:
-            if order == item:
-                order_count[item] += 1
-
-
-                print(order_count) 
+                  ('*' * 40) + '\n' + 'Enter quit any time to exit' )
+    while condition == True:
+            order = input('>' + '\t')
+            order = order.title()
+            if order == 'Quit':
+                condition = False
+                break
+            else:
+                    for _, order_count in menus.items():
+                        for item in order_count:
+                            if order == item:
+                                order_count[item] += 1
+                                print('** ' + str(order_count[item])+ ' order of ' + item + ' have been added to your meal **') 
+                
                
     
 
