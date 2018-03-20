@@ -46,6 +46,8 @@ def ordering():
             if order == 'Quit':
                 condition = False
                 break
+            elif order == 'Order':
+                print_receipt()
             else:
                 for _, value in menus.items():
                     for tuple_item, count in value.items():                   
@@ -56,7 +58,7 @@ def ordering():
                                   ' have been added to your meal **')
                             sub_total()
                             print('{} {}'.format('Your current total is now: ', '$' + str(sub_total())))
-                        elif order == 'Order':                       
+
                             
 def sub_total():
     total = 0.0
@@ -66,6 +68,16 @@ def sub_total():
             # print(tuple_item[1], count)
             total += tuple_item[1] * count
     return total
+
+
+def print_receipt():
+    for value in menus.values():
+        for tuple_item, count in value.items():
+            if count > 0:
+                print(count)
+                item_total = tuple_item[1] * count
+                print('{} {:>2} {:>22}'.format(tuple_item[0], 'x' + str(count), '$' + str(item_total)))
+        
 
 # menu_welcome()
 
