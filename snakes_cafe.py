@@ -20,6 +20,9 @@ menus = {'Appetizers': {('Wings', 2.00): 0, ('Cookies', 15.00): 0,
 
 
 def menu_welcome():
+    """ 
+    Prints our welcome message
+    """
     print("""
             ****************************************
             **     Welcome to the Snakes Cafe!    **
@@ -30,6 +33,9 @@ def menu_welcome():
 
 
 def menu_items():
+    """ 
+    Prints out the menu items
+    """
     for key, value in menus.items():
         print(key)
         print('-' * 10)
@@ -40,6 +46,17 @@ def menu_items():
 
 
 def ordering():
+    """
+    Ask user for order.  Responds based on the user input.
+    if user input is quit - program quits
+    if user input is order - prints out order receipt which includes
+        subtotal, tax and total
+    if user input is remove - removes one of item user removes
+    if user input is menu - prints menu
+    if user input is a category form the menu - prints items 
+        in that category.
+    
+    """
     condition = True
     print(('*' * 40) + '\n' + ('*' * 2) +
           'What would you like to order?  ' + ('*' * 2) + '\n' +
@@ -78,6 +95,9 @@ def ordering():
 
 
 def sub_total():
+    """
+    runs subtotal for receipt
+    """
     total = 0.00
     for _, value in menus.items():
         for tuple_item, count in value.items():
@@ -86,6 +106,9 @@ def sub_total():
 
 
 def print_receipt():
+    """
+    prints receipt when user enters 'order'
+    """
     subtotal = 0.0
     print('{} {}'.format('Order ', '#' + str(uuid.uuid4())))
     for value in menus.values():
