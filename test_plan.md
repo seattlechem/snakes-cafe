@@ -1,14 +1,22 @@
-List out in words each test that you intend to write
-For each test that you intend to write, name the function or functions that you intend to call and test
-If you change your tests, update your test plan
+## Test Plan for snakes_cafe 03_20_18
+
+# menu_welcome
+        test for accurate string to be printed
+        
+
+# menu_items
+        Output => string
+        Test if menu_item output is type string and matches test record
+
+# ordering
+        ordering requires user input and for this lab Scott said to not test for user input (for this days lab only).
 
 
+# sub_total
+        Output => == 0 since we have no user input at time of test
 
-Test if menu_item entered by user is in menu_item.
-The functions to be tested are:
-    menu_welcome
-    menu_items
-    ordering
-    sub_total
-    print_receipts
-    
+
+# print_receipts
+        Output (with no user input) => string of receipt print out with zero amounts
+        input => coffee = 
+        output => string of part of reciept

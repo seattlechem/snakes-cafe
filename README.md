@@ -3,7 +3,7 @@ Snakes Cafe restaurant Lab 1
 
 
 **Author**: Peter Kim and Jay Adams
-**Version**: 1.0.0 
+**Version**: 1.2.0 
 
 ## Overview
 Ordering system for the Snakes Resturant
@@ -19,6 +19,16 @@ written in Python3.6.4 within a virtual enviornment.
 No APIs were consumed by this app. 
 
 ## Change Log
+test completed for print receipt when ordering two coffee / Completed 4:00 03/21/18
+
+test completed for sub_total() when items are ordered
+
+test case completed for print_receipt()
+
+menu_items() was refactored
+
+fixed remove item function so that it prints receipt after order / Started 2:00 03/21/18
+
 functionality complete 7:15 03-19-18
 
 fixed order count 6:45 03-19-18
