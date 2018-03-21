@@ -83,14 +83,15 @@ def print_receipt():
             if count > 0:
                 item_total = tuple_item[1] * count
                 subtotal += item_total
+                item_total = '{0:.2f}'.format(item_total)
                 print('{} {:>2} {:>22}'.format(tuple_item[0], 'x' + str(count),
-                      '$' + str(round(item_total, 2))))
+                      '$' + str(item_total)))
     # sales tax
     sales_tax = subtotal * 0.101
     total = subtotal + sales_tax
     print('{} {:>22}'.format('Subtotal', '$' + str(round(subtotal, 2))))
     print('{} {:>22}'.format('Sales Tax', '$' + str(round(sales_tax, 2))))
-    print('{} {:>22}'.format('Total', '$' + str(round(total, 2))))
+    print('{} {:>22}'.format('Total Due', '$' + str(round(total, 2))))
 
 
         
