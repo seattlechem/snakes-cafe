@@ -74,6 +74,7 @@ def ordering():
                     for tuple_item in value.keys():
                         if order.split(' ')[1] == tuple_item[0]:
                             value[tuple_item] -= 1
+                print_receipt()
             elif order.split(' ')[0] == 'Menu':
                 menu_items()
             elif order.split(' ')[0] in menus.keys():
