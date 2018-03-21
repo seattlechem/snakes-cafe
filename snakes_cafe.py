@@ -65,22 +65,19 @@ def ordering():
                     if order.split(' ')[0] == key:
                         for key in value.keys():
                             print(key[0])
-                        
-                    #     print(key[0])
-                    # for key in value.values():
-                    #     print(key)
             else:
                 for value in menus.values():
-                    for tuple_item, count in value.items():                   
+                    for tuple_item, count in value.items():
                         if order == tuple_item[0]:
                             value[tuple_item] += 1
                             print('** ' + str(value[tuple_item]) +
                                   ' order of ' + tuple_item[0] +
                                   ' have been added to your meal **')
                             sub_total()
-                            print('{} {}'.format('Your current total is now: ', '$' + str(sub_total())))
+                            print('{} {}'.format('Your current total is now: ',
+                                  '$' + str(sub_total())))
 
-                            
+
 def sub_total():
     total = 0.00
     for _, value in menus.items():
@@ -115,5 +112,3 @@ def print_receipt():
 
 menu_items()
 ordering()
-
-
