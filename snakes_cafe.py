@@ -60,6 +60,15 @@ def ordering():
                             value[tuple_item] -= 1
             elif order.split(' ')[0] == 'Menu':
                 menu_items()
+            elif order.split(' ')[0] in menus.keys():
+                for key, value in menus.items():
+                    if order.split(' ')[0] == key:
+                        for key in value.keys():
+                            print(key[0])
+                        
+                    #     print(key[0])
+                    # for key in value.values():
+                    #     print(key)
             else:
                 for value in menus.values():
                     for tuple_item, count in value.items():                   
