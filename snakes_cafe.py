@@ -36,13 +36,20 @@ def menu_welcome():
 
 def menu_items():
     """Print out the menu items."""
+    menu_string = ''
+    item_group = ''
     for key, value in menus.items():
-        print(key)
-        print('-' * 10)
+        category_string = key
+        # print('-' * 10)
         for tuple_item in value:
             price = '{0:.2f}'.format(tuple_item[1])
-            print('{:<5}, {:>20}'.format(tuple_item[0],
-                  '$' + str(price)))
+            item_string = '{:<5}, {:>20}'.format(tuple_item[0],
+                                                 '$' + str(price) + '\n')
+            item_group += item_string
+        menu_string += '\n' + category_string + ('-' * 10) + '\n' + item_group
+        item_group = ''
+    print(menu_string)
+    return menu_string
 
 
 def ordering():
