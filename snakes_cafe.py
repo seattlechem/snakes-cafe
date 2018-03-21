@@ -20,11 +20,13 @@ menus = {'Appetizers': {('Wings', 2.00): 0, ('Cookies', 15.00): 0,
 
 
 def menu_welcome():
-    print('*' * 40)
-    print(('*' * 2) + '     Welcome to the Snakes Cafe!    ' + ('*' * 2))
-    print(('*' * 2) + ' ' * 36 + ('*' * 2))
-    print(('*' * 2) + '  To quit at any time, type "quit"  ' + ('*' * 2))
-    print('*' * 40)
+    print("""
+            ****************************************
+            **     Welcome to the Snakes Cafe!    **
+            **  ********************************  **
+            **   To quit at any time, Type 'quit' **
+            ****************************************
+           """)
 
 
 def menu_items():

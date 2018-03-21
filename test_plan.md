@@ -5,4 +5,10 @@ If you change your tests, update your test plan
 
 
 Test if menu_item entered by user is in menu_item.
-The function to be tested is "ordering".
+The functions to be tested are:
+    menu_welcome
+    menu_items
+    ordering
+    sub_total
+    print_receipts
+    
