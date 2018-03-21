@@ -55,13 +55,18 @@ Rice ,               $4.00
 """
 
 
-def test_sub_total():
+def test_print_receipt():
+    assert """Subtotal                   $0.0
+Sales Tax                   $0.0
+Total Due                   $0.0""" in snakes_cafe.print_receipt()
+
+
+def test_empty_sub_total():
     assert snakes_cafe.sub_total() == 0
 
 
-def test_print_receipt():
-    assert """ubtotal                   $0.0
-Sales Tax                   $0.0
-Total Due                   $0.0""" in snakes_cafe.print_receipt()
+def test_filled_sub_total():
+    snakes_cafe.menus['Appetizers'][('Wings', 2.00)] = 5
+    assert snakes_cafe.sub_total() == 10.00
 
 
