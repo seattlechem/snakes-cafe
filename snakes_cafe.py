@@ -20,7 +20,7 @@ menus = {'Appetizers': {('Wings', 2.00): 0, ('Cookies', 15.00): 0,
 
 
 def menu_welcome():
-    """ 
+    """
     Prints our welcome message
     """
     welcome = """
@@ -53,9 +53,9 @@ def ordering():
         subtotal, tax and total
     if user input is remove - removes one of item user removes
     if user input is menu - prints menu
-    if user input is a category form the menu - prints items 
+    if user input is a category form the menu - prints items
         in that category.
-    
+
     """
     condition = True
     print(('*' * 40) + '\n' + ('*' * 2) +
@@ -71,7 +71,7 @@ def ordering():
                 print_receipt()
             elif order.split(' ')[0] == 'Remove':
                 for value in menus.values():
-                    for tuple_item, count in value.items():
+                    for tuple_item in value.keys():
                         if order.split(' ')[1] == tuple_item[0]:
                             value[tuple_item] -= 1
             elif order.split(' ')[0] == 'Menu':
@@ -83,7 +83,7 @@ def ordering():
                             print(key[0])
             else:
                 for value in menus.values():
-                    for tuple_item, count in value.items():
+                    for tuple_item in value.keys():
                         if order == tuple_item[0]:
                             value[tuple_item] += 1
                             print('** ' + str(value[tuple_item]) +
