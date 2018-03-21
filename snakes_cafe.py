@@ -58,6 +58,8 @@ def ordering():
                     for tuple_item, count in value.items():
                         if order.split(' ')[1] == tuple_item[0]:
                             value[tuple_item] -= 1
+            elif order.split(' ')[0] == 'Menu':
+                menu_items()
             else:
                 for value in menus.values():
                     for tuple_item, count in value.items():                   
