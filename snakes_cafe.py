@@ -37,9 +37,6 @@ def menu_items():
                   '$' + str(price)))
 
 
-# menu_items()
-
-
 def ordering():
     condition = True
     print(('*' * 40) + '\n' + ('*' * 2) +
@@ -81,9 +78,7 @@ def ordering():
 def sub_total():
     total = 0.00
     for _, value in menus.items():
-        # print(key, value)
         for tuple_item, count in value.items():
-            # print(tuple_item[1], count)
             total += tuple_item[1] * count
     return total
 
