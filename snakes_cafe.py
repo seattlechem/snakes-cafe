@@ -23,19 +23,19 @@ def menu_welcome():
     """ 
     Prints our welcome message
     """
-    print("""
+    welcome = """
             ****************************************
             **     Welcome to the Snakes Cafe!    **
             **  ********************************  **
             **   To quit at any time, Type 'quit' **
             ****************************************
-           """)
+           """
+    print(welcome)
+    return welcome
 
 
 def menu_items():
-    """ 
-    Prints out the menu items
-    """
+    """Print out the menu items."""
     for key, value in menus.items():
         print(key)
         print('-' * 10)
@@ -117,8 +117,10 @@ def print_receipt():
                 item_total = tuple_item[1] * count
                 subtotal += item_total
                 item_total = '{0:.2f}'.format(item_total)
-                print('{} {:>2} {:>22}'.format(tuple_item[0], 'x' + str(count),
-                      '$' + str(item_total)))
+                receipt = '{} {:>2} {:>22}'.format(tuple_item[0], 'x' +
+                                                   str(count), '$' +
+                                                   str(item_total))
+                print(receipt)
     # sales tax
     sales_tax = subtotal * 0.101
     total = subtotal + sales_tax
