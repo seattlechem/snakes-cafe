@@ -105,5 +105,7 @@ def print_receipt():
 # calling functions
 
 
-menu_items()
-ordering()
+if __name__ == '__main__':
+    menu_welcome()
+    menu_items()
+    ordering()
