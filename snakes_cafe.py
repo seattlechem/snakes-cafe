@@ -48,13 +48,18 @@ def ordering():
     while condition:
             order = input('>' + '\t')
             order = order.title()
-            if order == 'Quit':
+            if order.split(' ')[0] == 'Quit':
                 condition = False
                 break
-            elif order == 'Order':
+            elif order.split(' ')[0] == 'Order':
                 print_receipt()
+            elif order.split(' ')[0] == 'Remove':
+                for value in menus.values():
+                    for tuple_item, count in value.items():
+                        if order.split(' ')[1] == tuple_item[0]:
+                            value[tuple_item] -= 1
             else:
-                for _, value in menus.items():
+                for value in menus.values():
                     for tuple_item, count in value.items():                   
                         if order == tuple_item[0]:
                             value[tuple_item] += 1
@@ -94,9 +99,7 @@ def print_receipt():
     print('{} {:>22}'.format('Total Due', '$' + str(round(total, 2))))
 
 
-        
-
-# menu_welcome()
+# calling functions
 
 
 menu_items()
