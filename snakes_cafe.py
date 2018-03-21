@@ -32,8 +32,9 @@ def menu_items():
         print(key)
         print('-' * 10)
         for tuple_item in value:
-            print('{:>22}, {:>22}'.format(tuple_item[0],
-                  '$' + str(tuple_item[1])))
+            price = '{0:.2f}'.format(tuple_item[1])
+            print('{:<5}, {:>20}'.format(tuple_item[0],
+                  '$' + str(price)))
 
 
 # menu_items()
@@ -65,7 +66,7 @@ def ordering():
 
                             
 def sub_total():
-    total = 0.0
+    total = 0.00
     for _, value in menus.items():
         # print(key, value)
         for tuple_item, count in value.items():
@@ -75,13 +76,23 @@ def sub_total():
 
 
 def print_receipt():
+    subtotal = 0.0
+    print('{} {}'.format('Order ', '#' + str(uuid.uuid4())))
     for value in menus.values():
         for tuple_item, count in value.items():
             if count > 0:
-                print(count)
                 item_total = tuple_item[1] * count
-                print('{} {}'.format('Order ', '#' + str(uuid.uuid4())))
-                print('{} {:>2} {:>22}'.format(tuple_item[0], 'x' + str(count), '$' + str(item_total)))
+                subtotal += item_total
+                print('{} {:>2} {:>22}'.format(tuple_item[0], 'x' + str(count),
+                      '$' + str(round(item_total, 2))))
+    # sales tax
+    sales_tax = subtotal * 0.101
+    total = subtotal + sales_tax
+    print('{} {:>22}'.format('Subtotal', '$' + str(round(subtotal, 2))))
+    print('{} {:>22}'.format('Sales Tax', '$' + str(round(sales_tax, 2))))
+    print('{} {:>22}'.format('Total', '$' + str(round(total, 2))))
+
+
         
 
 # menu_welcome()
