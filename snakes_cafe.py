@@ -40,7 +40,6 @@ def menu_items():
     item_group = ''
     for key, value in menus.items():
         category_string = key
-        # print('-' * 10)
         for tuple_item in value:
             price = '{0:.2f}'.format(tuple_item[1])
             item_string = '{:<5}, {:>20}'.format(tuple_item[0],
@@ -107,7 +106,7 @@ def sub_total():
     runs subtotal for receipt
     """
     total = 0.00
-    for _, value in menus.items():
+    for value in menus.values():
         for tuple_item, count in value.items():
             total += tuple_item[1] * count
     return total
@@ -132,9 +131,15 @@ def print_receipt():
     # sales tax
     sales_tax = subtotal * 0.101
     total = subtotal + sales_tax
-    print('{} {:>22}'.format('Subtotal', '$' + str(round(subtotal, 2))))
-    print('{} {:>22}'.format('Sales Tax', '$' + str(round(sales_tax, 2))))
-    print('{} {:>22}'.format('Total Due', '$' + str(round(total, 2))))
+    subtotal_string = '{} {:>22}'.format('Subtotal', '$' +
+                                         str(round(subtotal, 2)))
+    sales_tax_string = '{} {:>22}'.format('Sales Tax', '$' +
+                                          str(round(sales_tax, 2)))
+    total_string = '{} {:>22}'.format('Total Due', '$' + str(round(total, 2)))
+    receipt_string = '{}\n{}\n{}'.format(subtotal_string, sales_tax_string,
+                                         total_string)
+    print(receipt_string)
+    return receipt_string
 
 
 # calling functions
