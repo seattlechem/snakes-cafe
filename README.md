@@ -3,7 +3,7 @@ Snakes Cafe restaurant Lab 1
 
 
 **Author**: Peter Kim and Jay Adams
-**Version**: 1.0.0 
+**Version**: 1.2.0 
 
 ## Overview
 Ordering system for the Snakes Resturant
