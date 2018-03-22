@@ -1,5 +1,5 @@
 
-
+import csv
 import uuid
 
 menus = {'Appetizers': {('Wings', 2.00): 0, ('Cookies', 15.00): 0,
@@ -142,10 +142,51 @@ def print_receipt():
     return receipt_string
 
 
+def ask_optional_menu():
+    """
+        ask user if they want to use their own menu written in csv
+        if user input is no, print our own menu (menu_items())
+        input: yes, no
+        output: invoking the corresponding method
+    """
+    print("""Do you like to use your own menu (CSV only)?\n
+    If you want, please type 'Yes'\n
+    If you don't, please type 'No'""")
+    user_input = input('>' + '\t')
+    # while True:
+    if user_input == 'Yes':
+        ask_file_path()
+    elif user_input == 'No':
+        menu_items()
+    else:
+        print('Please answer only with Yes or No!')
+
+
+def ask_file_path():
+    """ ask user to provide a path file """
+    global menus
+    print('Please provide a file path to menu.csv')
+    file_path = input('>' + '\t')
+    with open(file_path, newline='') as menu_csv:
+        your_menu = csv.reader(menu_csv, delimiter=',')
+        custom_menu = {}
+        for row in your_menu:
+            # read out each row and generate menus
+            generate_menu(custom_menu, row)
+        menus = custom_menu
+
+
+def generate_menu(custom_menu, arr):
+    """This function creates custom_menu
+    in dictionary (with nested dict containing tuples) """
+    custom_menu[arr[1]] = {(arr[0], arr[2]): arr[3]}
+
+
 # calling functions
 
 
 if __name__ == '__main__':
     menu_welcome()
-    menu_items()
-    ordering()
+    ask_optional_menu()
+    # menu_items()
+    # ordering()
