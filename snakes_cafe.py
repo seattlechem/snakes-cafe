@@ -82,7 +82,7 @@ def ordering():
     order_string = 'What would you like to order?'
     order_string2 = 'Please enter item name and quantity separated by a comma.'
     order_string3 = 'Enter quit any time to exit.'
-    order_string4 = 'Enter remove if you want to remove an item.'
+    order_string4 = 'Enter "remove" if you want to remove an item.'
     print('{} {} {} {}'.format(order_string, order_string2,
                                order_string3, order_string4))
     while condition:
@@ -90,7 +90,7 @@ def ordering():
             user_input = user_input.title()
             if ',' in user_input:
                 user_input_item = user_input.split(',')[0]
-                user_input_qty = user_input.split(',')[1]
+                user_input_qty = float(user_input.split(',')[1])
             else:
                 user_input_item = user_input
                 user_input_qty = 1
@@ -100,10 +100,13 @@ def ordering():
             elif user_input_item == 'Order':
                 print_receipt()
             elif user_input_item == 'Remove':
-                for value in menus.values():
-                    for tuple_item in value.keys():
-                        if user_input.split(' ')[1] == tuple_item[0]:
-                            value[tuple_item] -= 1
+                print('Enter name of item that you want to remove')
+                which_item_remove = input('>' + '\t')
+                which_item_remove = which_item_remove.title()
+                for key in cart.keys():
+                    if which_item_remove == key:
+                        del cart[key]
+                        break
                 print_receipt()
             elif user_input_item == 'Menu':
                 menu_items()
@@ -125,8 +128,8 @@ def adding_item_to_cart(item_name, num_of_item=1):
     for key, value in menus.items():
         for tuple_item in value:
             if item_name == tuple_item[0]:
-                cart[tuple_item[0]] = {tuple_item[1]:
-                                       num_of_item}
+                cart[tuple_item[0]] = ({tuple_item[1]:
+                                        num_of_item})
     return cart
 
 
