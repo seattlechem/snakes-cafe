@@ -125,11 +125,18 @@ def ordering():
 
 # new function (test needed)
 def adding_item_to_cart(item_name, num_of_item=1):
+    prev_num = 0
     for key, value in menus.items():
         for tuple_item in value:
             if item_name == tuple_item[0]:
-                cart[tuple_item[0]] = ({tuple_item[1]:
-                                        num_of_item})
+                if tuple_item[0] in cart:
+                    prev_num = cart[tuple_item[0]][tuple_item[1]]
+                    cart[tuple_item[0]].update({tuple_item[1]:
+                                                prev_num + num_of_item})
+                    break
+                else:
+                    cart[tuple_item[0]] = {tuple_item[1]: num_of_item}
+                    break
     return cart
 
 
