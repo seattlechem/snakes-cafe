@@ -162,10 +162,11 @@ def ask_optional_menu():
     If you want, please type 'Yes'\n
     If you don't, please type 'No'""")
     user_input = input('>' + '\t')
+    answer = user_input.title()
     # while True:
-    if user_input == 'Yes':
+    if answer == 'Yes':
         ask_file_path()
-    elif user_input == 'No':
+    elif answer == 'No':
         menu_items()
     else:
         print('Please answer only with Yes or No!')
@@ -183,12 +184,15 @@ def ask_file_path():
             # read out each row and generate menus
             generate_menu(custom_menu, row)
         menus = custom_menu
+        menu_items()
 
 
 def generate_menu(custom_menu, arr):
     """This function creates custom_menu
     in dictionary (with nested dict containing tuples) """
-    custom_menu[arr[1]] = {(arr[0], arr[2]): arr[3]}
+    price = float(arr[2])
+    Qty = float(arr[3])
+    custom_menu[arr[1]] = {(arr[0], price): Qty}
 
 
 # calling functions
@@ -198,4 +202,4 @@ if __name__ == '__main__':
     menu_welcome()
     ask_optional_menu()
     # menu_items()
-    # ordering()
+    ordering()
