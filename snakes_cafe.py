@@ -1,22 +1,31 @@
 
-
+import csv
 import uuid
 
 menus = {'Appetizers': {('Wings', 2.00): 0, ('Cookies', 15.00): 0,
          ('Spring Rolls', 4.00): 0, ('Rings', 4.00): 0,
-         ('Crab Dip', 4.00): 0, ('Sliders', 4.00): 0},
+         ('Shrimp bites', 4.00): 0, ('Wontons', 4.00): 0,
+         ('Crab Dip', 4.00): 0, ('Sliders', 4.00): 0,
+         ('Clams', 8.00): 0},
          'Entrees': {('Salmon', 5.00): 0, ('Steak', 6.00): 0,
                      ('Meat Tornado', 4.00): 0, ('A Literal Garden', 3.00): 0,
-                     ('Pasta', 4.00): 0, ('Ribs', 4.00): 0},
+                     ('Pasta', 4.00): 0, ('Ribs', 4.00): 0,
+                     ('Cabbage Rolls', 8.00): 0, ('Pizza', 4.00): 0,
+                     ('Paella', 4.00): 0},
          'Desserts': {('Ice Cream', 500.0): 0, ('Cake', 30.00): 0,
                       ('Pie', 3.00): 0, ('Pudding', 4.00): 0,
-                      ('Fruit', 4.00): 0, ('Sorbet', 4.00): 0},
+                      ('Fruit', 4.00): 0, ('Sorbet', 4.00): 0,
+                      ('Torte', 4.00): 0, ('Flan', 4.00): 0,
+                      ('Apple', 4.00): 0},
          'Drinks': {('Coffee', 4.00): 0, ('Tea', 3.00): 0,
                     ('Blood of the Innocent', 6.00): 0, ('Pop', 4.00): 0,
-                    ('Wine', 4.00): 0, ('Beer', 4.00): 0},
+                    ('Wine', 4.00): 0, ('Beer', 4.00): 0,
+                    ('Sake', 4.00): 0, ('Cocoa', 4.00): 0,
+                    ('Evian', 4.00): 0},
          'Sides': {('Frys', 4.00): 0, ('Salad', 3.00): 0,
                    ('Bread', 6.00): 0, ('Slaw', 4.00): 0, ('Soup', 4.00): 0,
-                   ('Rice', 4.00): 0}}
+                   ('Rice', 4.00): 0, ('Spinach', 4.00): 0,
+                   ('Sauce', 4.00): 0, ('Crab dip', 4.00): 0}}
 
 
 def menu_welcome():
@@ -142,10 +151,55 @@ def print_receipt():
     return receipt_string
 
 
+def ask_optional_menu():
+    """
+        ask user if they want to use their own menu written in csv
+        if user input is no, print our own menu (menu_items())
+        input: yes, no
+        output: invoking the corresponding method
+    """
+    print("""Do you like to use your own menu (CSV only)?\n
+    If you want, please type 'Yes'\n
+    If you don't, please type 'No'""")
+    user_input = input('>' + '\t')
+    answer = user_input.title()
+    # while True:
+    if answer == 'Yes':
+        ask_file_path()
+    elif answer == 'No':
+        menu_items()
+    else:
+        print('Please answer only with Yes or No!')
+
+
+def ask_file_path():
+    """ ask user to provide a path file """
+    global menus
+    print('Please provide a file path to menu.csv')
+    file_path = input('>' + '\t')
+    with open(file_path, newline='') as menu_csv:
+        your_menu = csv.reader(menu_csv, delimiter=',')
+        custom_menu = {}
+        for row in your_menu:
+            # read out each row and generate menus
+            generate_menu(custom_menu, row)
+        menus = custom_menu
+        menu_items()
+
+
+def generate_menu(custom_menu, arr):
+    """This function creates custom_menu
+    in dictionary (with nested dict containing tuples) """
+    price = float(arr[2])
+    qty = float(arr[3])
+    custom_menu[arr[1]] = {(arr[0], price): qty}
+
+
 # calling functions
 
 
 if __name__ == '__main__':
     menu_welcome()
-    menu_items()
+    ask_optional_menu()
+    # menu_items()
     ordering()

@@ -77,3 +77,18 @@ def test_filled_sub_total():
     snakes_cafe.menus['Appetizers'][('Wings', 2.00)] = 5
     assert snakes_cafe.sub_total() == 10.00
     snakes_cafe.menus['Appetizers'][('Wings', 2.00)] = 0
+
+
+def test_generate_menu():
+    custom_menu = {}
+    arr = ['Frys', 'Appetizer', 10, 54]
+    snakes_cafe.generate_menu(custom_menu, arr)
+    assert custom_menu == {'Appetizer': {('Frys', 10): 54}}
+
+
+def test_generate_menu_filled():
+    custom_menu = {'Dessert': {('Flan', 4): 34}}
+    arr = ['Frys', 'Appetizer', 10, 54]
+    snakes_cafe.generate_menu(custom_menu, arr)
+    assert custom_menu == {'Dessert': {('Flan', 4): 34},
+                           'Appetizer': {('Frys', 10): 54}}

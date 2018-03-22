@@ -1,4 +1,4 @@
-## Test Plan for snakes_cafe 03_20_18
+## Test Plan for snakes_cafe 03_21_18
 
 # menu_welcome
         test for accurate string to be printed
@@ -20,3 +20,17 @@
         Output (with no user input) => string of receipt print out with zero amounts
         input => coffee = 
         output => string of part of reciept
+
+# ask_optional_menu
+        user input => yes or no so no test available
+        
+# ask_file_path
+        user input => no test possible
+
+# generate_menu
+        input => list 
+        output => dict with nested dict containing tuples 
+
+# generate_menu_filled
+        input => manually created list
+        output => dict vwith nested dict containing tuples

@@ -1,16 +1,17 @@
 # snakes-cafe
 Snakes Cafe restaurant Lab 1
 
+# snakes-cafe
+Snakes Cafe restaurant Lab 1
 
 **Author**: Peter Kim and Jay Adams
-**Version**: 1.2.0 
+**Version**: 1.3.0 
 
 ## Overview
-Ordering system for the Snakes Resturant
+Ordering system for the Snakes Resturant that allows users to see a menu and create orders.
 
 ## Getting Started
-Define a nested dictionary of menu categories thqt include that the menu items.
-Create functions that loop through the dictionaries after prompting the user to make selections. 
+Download the source code and relevant dependencies, navigate to the relevant downloads folder, and execute the script using the command: python3 snakes_cafe.py You can exit the program by 'quit" at any time.
 
 ## Architecture
 written in Python3.6.4 within a virtual enviornment. 
@@ -19,60 +20,13 @@ written in Python3.6.4 within a virtual enviornment.
 No APIs were consumed by this app. 
 
 ## Change Log
-test completed for print receipt when ordering two coffee / Completed 4:00 03/21/18
-
-test completed for sub_total() when items are ordered
-
-test case completed for print_receipt()
-
-menu_items() was refactored
-
-fixed remove item function so that it prints receipt after order / Started 2:00 03/21/18
-
-functionality complete 7:15 03-19-18
-
-fixed order count 6:45 03-19-18
-
-printing menu completed 6:15 03-19-18
- 
-initial setup / created welcome screen / started menu 5:15 03-19-18
- 
-Initial commit 4:45 03-19-18
-
-fixed code from yestereday 2:45 03-20-18
-
-added test to test.md. added sides and more items 3:05 03-20-18
-
-added claculation of items and cost 3:15 03-20-18
-
-added print receipt function 3:35 03-20-18
-
-added uuid 3:45 03-20-18
-
-changed item price to 2 decimal & added sales tax function 4:00 03-20-18
-
-fixed item total to 2 decimal float value 4:15 03-20-18
-
-added remove function 4:35 03-20-18
-
-user input menu prints menu 4:45 03-20-18
-
-printing items in the category when called by the user 5:15 03-20-18
-
-cleaned up linter errors 5:35 03-20-18
-
-code cleaned up 5:45 03-20-18
-
-wrapped our calls in name equals main call 6:00 03-20-18
-
-fixed welcome menu def 6:15 03-20-18
-
-added doc strings to functions 6:30 03-20-18
-
-added test for sub_total 6:45 03-20-18
-
-fixed linter errors 7:00 03-20-18
-
-deleted vscode file 7:15 03-20-18
-
-
+(1.3.0) aa40e81 (HEAD -> class_03_robust) menus updated
+(1.3.0) f0d093d (origin/class_03_robust) Merge branch 'class_03_robust' of https://github.com/seattlechem/snakes-cafe into class_03_robust
+(1.3.0) e8cf185 added test cases for generate_menu() / update test_plan.md / refactored ask_file_path()
+(1.3.0) 2479355 (origin/class-02-tdd, class-03-peter, class-02-tdd) updated readme.md
+(1.3.0) b8b71d2 test completed for print receipt when ordering two coffee
+(1.3.0) 503b600 test completed for sub_total() when items are ordered
+(1.3.0) a2fa899 test case completed for print_receipt()
+(1.3.0) 3066c47 menu_items() was refactored
+(1.3.0) ef645e0 fixed remove item function so that it prints receipt after order
+(1.3.0) 9749573 Merge pull request #2 from seattlechem/class-02-tdd
