@@ -191,8 +191,8 @@ def generate_menu(custom_menu, arr):
     """This function creates custom_menu
     in dictionary (with nested dict containing tuples) """
     price = float(arr[2])
-    Qty = float(arr[3])
-    custom_menu[arr[1]] = {(arr[0], price): Qty}
+    qty = float(arr[3])
+    custom_menu[arr[1]] = {(arr[0], price): qty}
 
 
 # calling functions
