@@ -101,6 +101,10 @@ def ordering():
                 for value in menus.values():
                     for tuple_item in value.keys():
                         if order == tuple_item[0]:
+                            # add the item with quantity into shopping cart located in global space
+                            # item price quantity_placed
+                            # after adding, print statement what and how many have been added into
+                            # print your current total
                             value[tuple_item] += 1
                             print('** ' + str(value[tuple_item]) +
                                   ' order of ' + tuple_item[0] +
@@ -192,7 +196,11 @@ def generate_menu(custom_menu, arr):
     in dictionary (with nested dict containing tuples) """
     price = float(arr[2])
     qty = float(arr[3])
-    custom_menu[arr[1]] = {(arr[0], price): qty}
+    if arr[1] in custom_menu.keys():
+        print(arr[1])
+        custom_menu[arr[1]][(arr[0], price)] = qty
+    else:
+        custom_menu[arr[1]] = {(arr[0], price): qty}
 
 
 # calling functions
