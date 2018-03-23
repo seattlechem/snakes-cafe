@@ -154,6 +154,8 @@ def quantity_check(num):
                 if num > value[tuple_item]:
                     print("We don't have that many.")
                     return False
+                return True
+    return False
 
 
 # new function (test needed)
@@ -188,18 +190,18 @@ def print_receipt():
     """
     prints receipt when user enters 'order'
     """
+    global cart
     subtotal = 0.0
     print('{} {}'.format('Order ', '#' + str(uuid.uuid4())))
-    for value in menus.values():
-        for tuple_item, count in value.items():
-            if count > 0:
-                item_total = tuple_item[1] * count
-                subtotal += item_total
-                item_total = '{0:.2f}'.format(item_total)
-                receipt = '{} {:>2} {:>22}'.format(tuple_item[0], 'x' +
-                                                   str(count), '$' +
-                                                   str(item_total))
-                print(receipt)
+    for item, info in cart.items():
+        for cost, qty in info.items():
+            item_total = cost * qty
+            subtotal += item_total
+            item_total = '{0:.2f}'.format(item_total)
+            receipt = '{} {:>2} {:>22}'.format(item, 'x' +
+                                               str(qty), '$' +
+                                               str(item_total))
+            print(receipt)
     # sales tax
     sales_tax = subtotal * 0.101
     total = subtotal + sales_tax
@@ -275,4 +277,3 @@ if __name__ == '__main__':
         main()
     except KeyboardInterrupt:
         print("Thank you for visiting snakes cafe.")
-    
