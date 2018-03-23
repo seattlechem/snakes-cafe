@@ -86,41 +86,62 @@ def ordering():
     print('{} {} {} {}'.format(order_string, order_string2,
                                order_string3, order_string4))
     while condition:
-            user_input = input('>' + '\t')
-            user_input = user_input.title()
-            if ',' in user_input:
-                user_input_item = user_input.split(',')[0]
-                user_input_qty = float(user_input.split(',')[1])
+        user_input = input('>' + '\t')
+        user_input = user_input.title()
+        if ',' in user_input:
+            user_input_item, quantity = user_input.split(', ', 1)
+            # check if qty is not negative or string
+            if quantity.isdigit() and int(quantity) > 0:
+                # check stock quantity if valid
+                user_input_qty = int(quantity)
+                if not quantity_check(user_input_qty):
+                    continue
             else:
-                user_input_item = user_input
-                user_input_qty = 1
-            if user_input_item == 'Quit':
-                condition = False
-                break
-            elif user_input_item == 'Order':
-                print_receipt()
-            elif user_input_item == 'Remove':
-                print('Enter name of item that you want to remove')
-                which_item_remove = input('>' + '\t')
-                which_item_remove = which_item_remove.title()
-                for key in cart.keys():
-                    if which_item_remove == key:
-                        del cart[key]
-                        break
-                print_receipt()
-            elif user_input_item == 'Menu':
-                menu_items()
-            elif user_input_item in menus.keys():
-                for key, value in menus.items():
-                    if user_input_item == key:
-                        for key in value.keys():
-                            print(key[0])
-            else:
-                adding_item_to_cart(user_input_item, user_input_qty)
-                print('** {} order of {} have been added'
-                      .format(user_input_qty, user_input_item))
-                print('Your current total is now: ${}'
-                      .format(str(sub_total())))
+                print('Your entered quantity is not valid.')
+                continue
+        else:
+            user_input_item = user_input
+            user_input_qty = 1
+        if user_input_item == 'Quit':
+            condition = False
+            break
+        elif user_input_item == 'Order':
+            print_receipt()
+        elif user_input_item == 'Remove':
+            print('Enter name of item that you want to remove')
+            which_item_remove = input('>' + '\t')
+            which_item_remove = which_item_remove.title()
+            for key in cart.keys():
+                if which_item_remove == key:
+                    del cart[key]
+                    break
+            print_receipt()
+        elif user_input_item == 'Menu':
+            menu_items()
+        elif user_input_item in menus.keys():
+            for key, value in menus.items():
+                if user_input_item == key:
+                    for key in value.keys():
+                        print(key[0])
+        else:
+            adding_item_to_cart(user_input_item, user_input_qty)
+            print('** {} order of {} have been added'
+                  .format(user_input_qty, user_input_item))
+            print('Your current total is now: ${}'
+                  .format(str(sub_total())))
+
+
+# quantity check
+def quantity_check(num):
+    global user_input
+    user_input = user_input.title()
+    item_name = user_input.split(', ')[0]
+    for value in menus.values():
+        for tuple_item in value:
+            if item_name == tuple_item[0]:
+                if num > value[tuple_item]:
+                    print("We don't have that many.")
+                    return False
 
 
 # new function (test needed)
@@ -206,6 +227,10 @@ def ask_file_path():
     global menus
     print('Please provide a file path to menu.csv')
     file_path = input('>' + '\t')
+    if not file_path.endswith('.csv'):
+        print("It's not a csv file.")
+        menu_items()
+        return
     with open(file_path, newline='') as menu_csv:
         your_menu = csv.reader(menu_csv, delimiter=',')
         custom_menu = {}
