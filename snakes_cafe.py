@@ -264,8 +264,15 @@ def generate_menu(custom_menu, arr):
         custom_menu[arr[1]] = {(arr[0], price): qty}
 
 
-if __name__ == '__main__':
+def main():
     menu_welcome()
     ask_optional_menu()
-    # menu_items()
     ordering()
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("Thank you for visiting snakes cafe.")
+    
