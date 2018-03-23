@@ -112,10 +112,11 @@ def ordering():
             which_item_remove = input('>' + '\t')
             which_item_remove = which_item_remove.title()
             for key in cart.keys():
-                if which_item_remove == key:
+                if which_item_remove in key:
                     del cart[key]
-                    break
-            print_receipt()
+                    continue
+            print('The item is not in your order.')
+            continue
         elif user_input_item == 'Menu':
             menu_items()
         elif user_input_item in menus.keys():
@@ -124,11 +125,22 @@ def ordering():
                     for key in value.keys():
                         print(key[0])
         else:
+            if not item_check(user_input_item):
+                continue
             adding_item_to_cart(user_input_item, user_input_qty)
             print('** {} order of {} have been added'
                   .format(user_input_qty, user_input_item))
             print('Your current total is now: ${}'
                   .format(str(sub_total())))
+
+
+# item check
+def item_check(item_name):
+    for value in menus.values():
+        if item_name in [key[0] for key in value]:
+            return True
+    print("We don't have that item.")
+    return False
 
 
 # quantity check
