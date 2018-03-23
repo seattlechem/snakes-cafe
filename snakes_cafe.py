@@ -2,6 +2,49 @@
 import csv
 import uuid
 
+
+class Order:
+    """ Class for orders """
+
+
+def __init__(self):
+        self.oid = uuid4()
+        self.final_order = {}
+
+
+def __repr__(self):
+        print('Order #{} | items: {} | total : {:2f}'.format(self.oid,
+              self.__len__(), self.receipt()))
+
+
+def __len__(self):
+        return sum(self.order.values())
+
+
+def add_items(self, item, items):
+    # adds food items to the running order and prints current subtotoal
+
+
+def print(self):
+    # print function
+
+
+def remove(self, item):
+    """
+    removes one item form current order
+    
+
+Every Order should have a remove_item method that takes an item name and a quantity as arguments. There should be a default value for quantity if none is given.
+Every Order should have a display_order() method that prints the user's current order to the console
+Every Order should have a print_receipt() method that creates a file containing the text of the user's full order. The file name should be of the format order-<the uuid>.txt and should have the same output as display_order
+All of the order input-checking that you used to do will be done by this class
+The repr of Order instances should look like <Order #ba99d8... | Items: 4 | Total: $754.23>
+When print() is called on an order instance, the user's current order is printed as if display_order was called.
+When len() is called on an order instance, the number of items in the order is returned
+
+""" 
+
+
 menus = {'Appetizers': {('Wings', 2.00): 3, ('Cookies', 15.00): 3,
          ('Spring Rolls', 4.00): 3, ('Rings', 4.00): 3,
          ('Shrimp bites', 4.00): 3, ('Wontons', 4.00): 3,
