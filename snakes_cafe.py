@@ -65,7 +65,7 @@ def menu_items():
     return menu_string
 
 
-def ordering():
+def ordering():  # pragma: no cover
     """
     Ask user for order.  Responds based on the user input.
     if user input is quit - program quits
@@ -134,7 +134,7 @@ def ordering():
                   .format(str(sub_total())))
 
 
-# item check
+# Check if item is in menu
 def item_check(item_name):
     for value in menus.values():
         if item_name in [key[0] for key in value]:
@@ -143,7 +143,7 @@ def item_check(item_name):
     return False
 
 
-# quantity check
+# check if we have in qty the amnt being ordered
 def quantity_check(num):
     global user_input
     user_input = user_input.title()
@@ -158,8 +158,10 @@ def quantity_check(num):
     return False
 
 
-# new function (test needed)
 def adding_item_to_cart(item_name, num_of_item=1):
+    """ 
+    adds item to cart after use orders it
+    """
     prev_num = 0
     for key, value in menus.items():
         for tuple_item in value:
