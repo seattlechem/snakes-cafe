@@ -1,48 +1,6 @@
 
 import csv
-import uuid
-
-
-class Order:
-    """ Class for orders """
-
-
-def __init__(self):
-        self.oid = uuid4()
-        self.final_order = {}
-
-
-def __repr__(self):
-        print('Order #{} | items: {} | total : {:2f}'.format(self.oid,
-              self.__len__(), self.receipt()))
-
-
-def __len__(self):
-        return sum(self.order.values())
-
-
-def add_items(self, item, items):
-    # adds food items to the running order and prints current subtotoal
-
-
-def print(self):
-    # print function
-
-
-def remove(self, item):
-    """
-    removes one item form current order
-    
-
-Every Order should have a remove_item method that takes an item name and a quantity as arguments. There should be a default value for quantity if none is given.
-Every Order should have a display_order() method that prints the user's current order to the console
-Every Order should have a print_receipt() method that creates a file containing the text of the user's full order. The file name should be of the format order-<the uuid>.txt and should have the same output as display_order
-All of the order input-checking that you used to do will be done by this class
-The repr of Order instances should look like <Order #ba99d8... | Items: 4 | Total: $754.23>
-When print() is called on an order instance, the user's current order is printed as if display_order was called.
-When len() is called on an order instance, the number of items in the order is returned
-
-""" 
+from uuid import uuid4
 
 
 menus = {'Appetizers': {('Wings', 2.00): 3, ('Cookies', 15.00): 3,
@@ -70,10 +28,139 @@ menus = {'Appetizers': {('Wings', 2.00): 3, ('Cookies', 15.00): 3,
                    ('Rice', 4.00): 3, ('Spinach', 4.00): 3,
                    ('Sauce', 4.00): 3, ('Crab dip', 4.00): 3}}
 
-cart = {}
 
+class Order:
+    """Class for Order"""
+    def __init__(self):
+        self.id = str(uuid4())
+        self.cart = {}
 
-user_input = ''
+    def __len__(self):
+        return len(self.cart())
+
+    def add_item(self, item_name, quantity=1):
+        if quantity.isdigit() and int(quantity) > 0:
+            quantity = int(quantity)
+            if not self._quantity_check(item_name, quantity):
+                continue
+        else:
+            print('Your entered quantity is not valid.')
+            continue
+        if not item_check(user_input_item):
+                continue
+        for key, value in menus.items():
+            for tuple_item in value:
+                if item_name == tuple_item[0]:
+                    if tuple_item[0] in self.cart:
+                        self.cart[tuple_item[0]]['quantity'] += num_of_item
+                    else:
+                        self.cart[tuple_item[0]] = {'price': tuple_item[1],
+                                                    'quantity': num_of_item}
+                    print('** {} order of {} have been added into your cart.\
+                          Your current total is now: ${}'
+                          .format(user_input_qty, user_input_item,
+                                  str(self._subtotal())))
+                    break
+
+    def remove_item(self, item_name, num=1):
+        """remove item """
+        for key in cart.keys():
+            if item_name in key:
+                if num == cart[key]['quantity']:
+                    del cart[key]
+                elif num > cart[key]['quantity'] or num < 0:
+                    print('Please check your quantity.')
+                else:
+                    cart[key]['quantity'] -= num
+                break
+        print('The item is not in your order.')
+
+    def display_order(self):
+        subtotal = 0.0
+        print('{} {} {} {}'.format('*' * 40, 'Order id: #' + self.id + '\n',
+              'Thank you for visiting the Snakes Cafe!' + '\n', '*' * 40,))
+        for item, info in cart.items():
+            item_total = info['price'] * info['quantity']
+            subtotal += item_total
+            item_total = '{0:.2f}'.format(item_total)
+            receipt = '{} {:>2} {:>22}'.format(item, 'x' +
+                                               str(info['quantity']), '$' +
+                                               str(item_total))
+            print(receipt)
+        # sales tax
+        sales_tax = subtotal * 0.101
+        total = subtotal + sales_tax
+        subtotal_string = '{} {:>22}'.format('Subtotal', '$' +
+                                             str(round(subtotal, 2)))
+        sales_tax_string = '{} {:>22}'.format('Sales Tax', '$' +
+                                              str(round(sales_tax, 2)))
+        total_string = '{} {:>22}'.format('Total Due', '$' +
+                                          str(round(total, 2)))
+        receipt_string = '{}\n{}\n{}'.format(subtotal_string, sales_tax_string,
+                                             total_string)
+        print(receipt_string)
+        return receipt_string
+
+    def print_receipt(self):
+        """save the current order as file."""
+        self.display_order()
+        a = ''
+        a += receipt_string
+        with open('receipts/' + self.id + '.txt', 'w') as f:
+            f.write(a)
+
+    def _subtotal():
+        for item, info in cart.items():
+            item_total = info['price'] * info['quantity']
+            subtotal += item_total
+            subtotal = '{0:.2f}'.format(subtotal)
+        return subtotal
+
+    def main(self):
+        while True:
+            self._order_prompt()
+
+    def _order_prompt(self):
+        order_prompt = '''What would you like to order?
+        Please enter item name and quantity separated by a comma.
+        Enter quit any time to exit.
+        Enter "remove" if you want to remove an item.'''
+        print('{} {} {}'.format('*' * 40, order_prompt, '*' * 40))
+        user_input = input('>\t')
+        user_input = user_input.title()
+        return user_input
+
+    def _quantity_check(self, item, qty):
+        for value in menus.values():
+            for tuple_item in value:
+                if item == tuple_item[0]:
+                    if num > value[tuple_item]:
+                        print("We don't have that many.")
+                        return False
+                    return True
+        return False
+
+    def _user_input_check(self, user_input):
+        if user_input_item == 'Quit':
+            break
+        elif user_input_item == 'Order':
+            self.print_receipt()
+        elif user_input_item == 'Menu':
+            menu_items()
+        elif user_input_item == 'Remove':
+            print('''
+            Enter name of item and quantity that\
+            you want to remove separated by comma.''')
+            which_item_remove = input('>\t')
+            which_item_remove = which_item_remove.title()
+            self.remove_item(item, num)
+            continue
+        elif user_input_item in menus.keys():
+            print_sub_menu(user_input_item)
+        else:
+            if ',' in user_input:
+                user_input_item, quantity = user_input.split(', ', 1)
+                self.add_item(user_input_item, user_input_qty)
 
 
 def menu_welcome():
@@ -108,6 +195,13 @@ def menu_items():
     return menu_string
 
 
+def print_sub_menu(str):
+    for key, value in menus.items():
+        if str == key:
+            for item in value.keys():
+                print(item[0])
+
+
 def ordering():
     """
     Ask user for order.  Responds based on the user input.
@@ -129,7 +223,7 @@ def ordering():
     print('{} {} {} {}'.format(order_string, order_string2,
                                order_string3, order_string4))
     while condition:
-        user_input = input('>' + '\t')
+        user_input = input('>\t')
         user_input = user_input.title()
         if ',' in user_input:
             user_input_item, quantity = user_input.split(', ', 1)
@@ -152,7 +246,7 @@ def ordering():
             print_receipt()
         elif user_input_item == 'Remove':
             print('Enter name of item that you want to remove')
-            which_item_remove = input('>' + '\t')
+            which_item_remove = input('>\t')
             which_item_remove = which_item_remove.title()
             for key in cart.keys():
                 if which_item_remove in key:
@@ -310,7 +404,12 @@ def generate_menu(custom_menu, arr):
 
 
 def main():
+    new_order = Order()
     menu_welcome()
+    new_order.main()
+    display menu
+
+
     ask_optional_menu()
     ordering()
 
