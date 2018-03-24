@@ -34,3 +34,15 @@
 # generate_menu_filled
         input => manually created list
         output => dict vwith nested dict containing tuples
+# item Check
+        Item check tests true if item is in menu is true.
+        item check tests false if item is in menu is false. 
+
+# quantity check
+        Item check tests true if test quantity matches amount in menu
+        Item check tests False if test quantity  amount is greater then what is in menu  
+
+# adding_item_to_cart
+tests that an item added to cart is in cart
+tests that an tiem is added twice via multiple lines
+tests that an item is added for multiple qunatities via one line 
