@@ -62,7 +62,7 @@ class Order:
                     else:
                         self.cart[tuple_item[0]] = {'price': tuple_item[1],
                                                     'quantity': quantity}
-                    print('** {} order of {} have been added into your cart.\
+                    print('** {} order of {} have been added into your cart.\n\
                           Your current total is now: ${}'
                           .format(item_name, quantity,
                                   self._subtotal()))
@@ -83,8 +83,8 @@ class Order:
 
     def display_order(self):
         subtotal = 0.0
-        print('{} {} {} {}'.format('*' * 40, 'Order id: #' + self.id + '\n',
-              'Thank you for visiting the Snakes Cafe!' + '\n', '*' * 40,))
+        print('{} {} {} {}'.format('*' * 60, 'Order id: #' + self.id + '\n',
+              'Thank you for visiting the Snakes Cafe!' + '\n', '*' * 60,))
         for item, info in self.cart.items():
             item_total = info['price'] * info['quantity']
             subtotal += item_total
@@ -134,11 +134,14 @@ class Order:
         return subtotal
 
     def _order_prompt(self):
-        order_prompt = '''What would you like to order?
-        Please enter item name and quantity separated by a comma.
+        order_prompt = '''
+        What would you like to order?
+        Please enter item name and quantity
+        separated by a comma.
         Enter quit any time to exit.
-        Enter "remove" if you want to remove an item.'''
-        print('{} {} {}'.format('*' * 40, order_prompt, '*' * 40))
+        Enter "remove" if you want to
+        remove an item.'''
+        print('{}\n{}\n{}'.format('*' * 60, order_prompt, '*' * 60))
         user_input = input('>\t')
         user_input = user_input.title()
         return user_input
