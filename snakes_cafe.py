@@ -302,13 +302,16 @@ def ask_file_path():
         print("It's not a csv file.")
         menu_items()
         return
-    with open(file_path, newline='') as menu_csv:
-        your_menu = csv.reader(menu_csv, delimiter=',')
-        custom_menu = {}
-        for row in your_menu:
-            generate_menu(custom_menu, row)
-        menus = custom_menu
-        menu_items()
+    try:
+        with open(file_path, newline='') as menu_csv:
+            your_menu = csv.reader(menu_csv, delimiter=',')
+            custom_menu = {}
+            for row in your_menu:
+                generate_menu(custom_menu, row)
+            menus = custom_menu
+            menu_items()
+    except FileNotFoundError:
+        raise FileNotFoundError('You file cannot be found. Please check your file')
 
 
 def generate_menu(custom_menu, arr):
