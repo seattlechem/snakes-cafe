@@ -1,4 +1,3 @@
-
 import csv
 from uuid import uuid4
 
@@ -50,9 +49,9 @@ class Order:
         if quantity > 0:
             if not self._quantity_check(item_name, quantity):
                 return
-        else:
-            print('Your entered quantity is not valid.')
-            return
+        # else:
+        #     print('Your entered quantity is not valid.')
+        #     return
             
         for key, value in menus.items():
             for tuple_item in value:
@@ -147,12 +146,20 @@ class Order:
         return user_input
 
     def _quantity_check(self, item, qty):
+        num = 0
         for value in menus.values():
             for tuple_item in value:
                 if item == tuple_item[0]:
                     if qty > value[tuple_item]:
                         print("We don't have that many.")
                         return False
+                    for key in self.cart.keys():
+                        if item == key:
+                            num = self.cart[item]['quantity']
+                            if qty + num > value[tuple_item]:
+                                print("We don't have that many")
+                                return False
+                            return True
                     return True
         return False
 
@@ -234,43 +241,44 @@ def item_check(item_name):
 
 
 # quantity check
-def quantity_check(num):
-    global user_input
-    user_input = user_input.title()
-    item_name = user_input.split(', ')[0]
-    for value in menus.values():
-        for tuple_item in value:
-            if item_name == tuple_item[0]:
-                if num > value[tuple_item]:
-                    print("We don't have that many.")
-                    return False
-                return True
-    return False
+# def quantity_check(num):
+#     global user_input
+#     user_input = user_input.title()
+#     item_name = user_input.split(', ')[0]
+#     for value in menus.values():
+#         for tuple_item in value:
+#             if item_name == tuple_item[0]:
+#                 if num > value[tuple_item]:
+#                     print("We don't have that many.")
+#                     return False
+#                 if item_name in self.cart
+#                 return True
+#     return False
 
 
 # new function (test needed)
-def adding_item_to_cart(item_name, num_of_item=1):
-    prev_num = 0
-    for key, value in menus.items():
-        for tuple_item in value:
-            if item_name == tuple_item[0]:
-                if tuple_item[0] in cart:
-                    prev_num = cart[tuple_item[0]][tuple_item[1]]
-                    cart[tuple_item[0]].update({tuple_item[1]:
-                                                prev_num + num_of_item})
-                    break
-                else:
-                    cart[tuple_item[0]] = {tuple_item[1]: num_of_item}
-                    break
-    return cart
+# def adding_item_to_cart(self, item_name, num_of_item=1):
+#     prev_num = 0
+#     for key, value in menus.items():
+#         for tuple_item in value:
+#             if item_name == tuple_item[0]:
+#                 if tuple_item[0] in self.cart:
+#                     prev_num = self.cart[tuple_item[0]][tuple_item[1]]
+#                     self.cart[tuple_item[0]].update({tuple_item[1]:
+#                                                      prev_num + num_of_item})
+#                     break
+#                 else:
+#                     self.cart[tuple_item[0]] = {tuple_item[1]: num_of_item}
+#                     break
+#     return self.cart
 
 
-def sub_total():
+def sub_total(self):
     """
     runs subtotal for receipt
     """
     total = 0.00
-    for value in cart.values():
+    for value in self.cart.values():
         for item_price, count in value.items():
             total += item_price * count
     return total

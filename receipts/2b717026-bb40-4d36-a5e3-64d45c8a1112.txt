@@ -1,0 +1,3 @@
+Subtotal                   $4.0
+Sales Tax                   $0.4
+Total Due                   $4.4
