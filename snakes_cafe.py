@@ -240,23 +240,6 @@ def item_check(item_name):
     return False
 
 
-# new function (test needed)
-# def adding_item_to_cart(self, item_name, num_of_item=1):
-#     prev_num = 0
-#     for key, value in menus.items():
-#         for tuple_item in value:
-#             if item_name == tuple_item[0]:
-#                 if tuple_item[0] in self.cart:
-#                     prev_num = self.cart[tuple_item[0]][tuple_item[1]]
-#                     self.cart[tuple_item[0]].update({tuple_item[1]:
-#                                                      prev_num + num_of_item})
-#                     break
-#                 else:
-#                     self.cart[tuple_item[0]] = {tuple_item[1]: num_of_item}
-#                     break
-#     return self.cart
-
-
 def sub_total(self):
     """
     runs subtotal for receipt
@@ -306,7 +289,8 @@ def ask_file_path():
             menus = custom_menu
             menu_items()
     except FileNotFoundError:
-        raise FileNotFoundError('You file cannot be found. Please check your file')
+        raise FileNotFoundError('You file cannot be found.\
+                                 Please check your file')
 
 
 def generate_menu(custom_menu, arr):
