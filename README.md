@@ -17,7 +17,10 @@ Download the source code and relevant dependencies, navigate to the relevant dow
 written in Python3.6.4 within a virtual enviornment. 
 
 ## API
-No APIs were consumed by this app. 
+No APIs were consumed by this app.
+
+## Custom Menu
+The menu can be substituted by user's custom menu. The custom menu should be in csv file format, and each row should be separated by comma in order of item_name, category_name, price, and stock_quantity.
 
 ## Change Log
 (1.3.0) aa40e81 menus updated
