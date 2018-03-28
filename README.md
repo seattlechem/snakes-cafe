@@ -20,10 +20,10 @@ written in Python3.6.4 within a virtual enviornment.
 No APIs were consumed by this app. 
 
 ## Change Log
-(1.3.0) aa40e81 (HEAD -> class_03_robust) menus updated
-(1.3.0) f0d093d (origin/class_03_robust) Merge branch 'class_03_robust' of https://github.com/seattlechem/snakes-cafe into class_03_robust
+(1.3.0) aa40e81 menus updated
+(1.3.0) f0d093d Merge branch 'class_03_robust' of https://github.com/seattlechem/snakes-cafe into class_03_robust
 (1.3.0) e8cf185 added test cases for generate_menu() / update test_plan.md / refactored ask_file_path()
-(1.3.0) 2479355 (origin/class-02-tdd, class-03-peter, class-02-tdd) updated readme.md
+(1.3.0) 2479355 updated readme.md
 (1.3.0) b8b71d2 test completed for print receipt when ordering two coffee
 (1.3.0) 503b600 test completed for sub_total() when items are ordered
 (1.3.0) a2fa899 test case completed for print_receipt()

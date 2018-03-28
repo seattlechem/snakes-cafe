@@ -49,10 +49,6 @@ class Order:
         if quantity > 0:
             if not self._quantity_check(item_name, quantity):
                 return
-        # else:
-        #     print('Your entered quantity is not valid.')
-        #     return
-            
         for key, value in menus.items():
             for tuple_item in value:
                 if item_name == tuple_item[0]:
@@ -75,10 +71,11 @@ class Order:
                     del self.cart[key]
                 elif num > self.cart[key]['quantity'] or num < 0:
                     print('Please check your quantity.')
+                    return
                 else:
                     self.cart[key]['quantity'] -= num
+                print('{} order of {} is removed.'.format(num, item_name))
                 break
-        print('The item is not in your order.')
 
     def display_order(self):
         subtotal = 0.0
@@ -172,7 +169,7 @@ class Order:
             menu_items()
         elif user_input == 'Remove':
             print('''
-            Enter name of item and quantity that\
+            Enter name of item and quantity that
             you want to remove separated by comma.''')
             which_item_remove = input('>\t')
             which_item_remove = which_item_remove.title()
@@ -289,8 +286,9 @@ def ask_file_path():
             menus = custom_menu
             menu_items()
     except FileNotFoundError:
-        raise FileNotFoundError('You file cannot be found.\
-                                 Please check your file')
+        print('''You file cannot be found.
+Please check your file name.
+''')
 
 
 def generate_menu(custom_menu, arr):
