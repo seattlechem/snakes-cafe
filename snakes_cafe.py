@@ -240,22 +240,6 @@ def item_check(item_name):
     return False
 
 
-# quantity check
-# def quantity_check(num):
-#     global user_input
-#     user_input = user_input.title()
-#     item_name = user_input.split(', ')[0]
-#     for value in menus.values():
-#         for tuple_item in value:
-#             if item_name == tuple_item[0]:
-#                 if num > value[tuple_item]:
-#                     print("We don't have that many.")
-#                     return False
-#                 if item_name in self.cart
-#                 return True
-#     return False
-
-
 # new function (test needed)
 # def adding_item_to_cart(self, item_name, num_of_item=1):
 #     prev_num = 0
