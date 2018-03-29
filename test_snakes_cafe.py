@@ -130,6 +130,11 @@ def test_generate_menu():
     assert custom_menu == {'Appetizer': {('Frys', 10): 54}}
 
 
+def test_print_sub_menu():
+    assert snakes_cafe.print_sub_menu('Drinks') == 'Coffee\nTea\n\
+Blood of the Innocent\nPop\nWine\nBeer\nSake\nCocoa\nEvian\n'
+
+
 def test_generate_menu_filled():
     ''' This test the validation of adding additional
     menu items into the pre-existing menu'''

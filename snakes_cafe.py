@@ -31,19 +31,23 @@ menus = {'Appetizers': {('Wings', 2.00): 3, ('Cookies', 15.00): 3,
 class Order:
     """Class for Order"""
     def __init__(self):
+        ''' Initialize with uuid ID and empty dict cart'''
         self.id = str(uuid4())
         self.cart = {}
 
     def __len__(self):
+        ''' Number of items in cart'''
         return len(self.cart)
 
     def main(self):
+        ''' for loop for order_prompt and user_input_check'''
         flag = True
         while flag:
             user_input = self._order_prompt()
             flag = self._user_input_check(user_input)
 
     def add_item(self, item_name, quantity=1):
+        ''' this method adds item into cart '''
         if not item_check(item_name):
             return
         if quantity > 0:
@@ -79,6 +83,7 @@ class Order:
                 return rm_str
 
     def display_order(self):
+        ''' This return receipt as a string'''
         subtotal = 0.0
         print('{} {} {} {}'.format('*' * 60, 'Order id: #' + self.id + '\n',
               'Thank you for visiting the Snakes Cafe!' + '\n', '*' * 60,))
@@ -113,6 +118,7 @@ class Order:
             f.write(a)
 
     def _remove_check(self, user_input):
+        ''' This checks / passes user input'''
         if ',' in user_input:
             user_input_item, quantity = user_input.split(', ', 1)
             if quantity.isdigit():
@@ -127,6 +133,7 @@ class Order:
                 print(res)
 
     def _subtotal(self):
+        ''' This returns subtotal'''
         subtotal = 0
         for item, info in self.cart.items():
             item_total = info['price'] * info['quantity']
@@ -135,6 +142,7 @@ class Order:
         return subtotal
 
     def _order_prompt(self):
+        ''' this prints out order prompt and return user_input'''
         order_prompt = '''
         What would you like to order?
         Please enter item name and quantity
@@ -148,6 +156,7 @@ class Order:
         return user_input
 
     def _quantity_check(self, item, qty):
+        ''' This checks validity of order quantity'''
         num = 0
         for value in menus.values():
             for tuple_item in value:
@@ -180,7 +189,9 @@ class Order:
             which_item_remove = which_item_remove.title()
             self._remove_check(which_item_remove)
         elif user_input in menus.keys():
-            print_sub_menu(user_input)
+            sub_menu = print_sub_menu(user_input)
+            if sub_menu:
+                print(sub_menu)
         else:
             if ',' in user_input:
                 user_input_item, quantity = user_input.split(', ', 1)
@@ -233,6 +244,15 @@ def item_check(item_name):
             return True
     print("We don't have that item.")
     return False
+
+
+def print_sub_menu(user_input):
+    a = ''
+    for key, val in menus.items():
+        if user_input == key:
+            for key in val.keys():
+                a += key[0] + '\n'
+            return a
 
 
 def ask_optional_menu():
