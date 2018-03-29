@@ -235,24 +235,12 @@ def print_sub_menu(str):
                 return item[0]
 
 
-# item check
 def item_check(item_name):
     for value in menus.values():
         if item_name in [key[0] for key in value]:
             return True
     print("We don't have that item.")
     return False
-
-
-def sub_total(self):
-    """
-    runs subtotal for receipt
-    """
-    total = 0.00
-    for value in self.cart.values():
-        for item_price, count in value.items():
-            total += item_price * count
-    return total
 
 
 def ask_optional_menu():
