@@ -109,6 +109,10 @@ def test_display_order(cart_3_wings):
 Total Due                  $6.61''' in cart_3_wings.display_order()
 
 
+def test_subtotal(cart_3_wings):
+    assert cart_3_wings._subtotal() == '6.00'
+
+
 
 
 # def test_empty_print_receipt():
