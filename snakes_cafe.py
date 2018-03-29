@@ -239,6 +239,7 @@ def menu_items():
 
 
 def item_check(item_name):
+    ''' It checks if item is in menu'''
     for value in menus.values():
         if item_name in [key[0] for key in value]:
             return True
@@ -247,6 +248,7 @@ def item_check(item_name):
 
 
 def print_sub_menu(user_input):
+    ''' It prints items in category'''
     a = ''
     for key, val in menus.items():
         if user_input == key:
