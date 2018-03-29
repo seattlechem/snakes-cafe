@@ -79,7 +79,16 @@ Crab dip,               $4.00
 
 
 def test_len_order_class(empty_order):
+    ''' This tests the length of empty Order object is 0 '''
     assert len(empty_order) == 0
+
+
+def test_add_item(empty_order):
+    ''' This tests the printout when adding 3 Wings into cart'''
+    assert empty_order.add_item('Wings', 3) == '** 3 order of Wings have been added to your cart.\n\
+                          Your current total is now: $6.00'
+    
+    
 
 # def test_empty_print_receipt():
 #     assert """Subtotal                   $0.0

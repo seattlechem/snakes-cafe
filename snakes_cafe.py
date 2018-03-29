@@ -57,11 +57,12 @@ class Order:
                     else:
                         self.cart[tuple_item[0]] = {'price': tuple_item[1],
                                                     'quantity': quantity}
-                    print('** {} order of {} have been added into your cart.\n\
-                          Your current total is now: ${}'
-                          .format(item_name, quantity,
-                                  self._subtotal()))
-                    break
+                    return_string = '** {} order of {} have been added to your cart.\n\
+                          Your current total is now: ${}'.format(quantity,
+                                                                 item_name,
+                                                                 self.
+                                                                 _subtotal())
+                    return return_string
 
     def remove_item(self, item_name, num=1):
         """remove item """
@@ -180,7 +181,9 @@ class Order:
             if ',' in user_input:
                 user_input_item, quantity = user_input.split(', ', 1)
                 if quantity.isdigit():
-                    self.add_item(user_input_item, int(quantity))
+                    added = self.add_item(user_input_item, int(quantity))
+                    if added:
+                        print(added)
                 else:
                     print('Please enter number.')
             else:
