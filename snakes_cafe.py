@@ -1,31 +1,209 @@
-
 import csv
-import uuid
+from uuid import uuid4
 
-menus = {'Appetizers': {('Wings', 2.00): 0, ('Cookies', 15.00): 0,
-         ('Spring Rolls', 4.00): 0, ('Rings', 4.00): 0,
-         ('Shrimp bites', 4.00): 0, ('Wontons', 4.00): 0,
-         ('Crab Dip', 4.00): 0, ('Sliders', 4.00): 0,
-         ('Clams', 8.00): 0},
-         'Entrees': {('Salmon', 5.00): 0, ('Steak', 6.00): 0,
-                     ('Meat Tornado', 4.00): 0, ('A Literal Garden', 3.00): 0,
-                     ('Pasta', 4.00): 0, ('Ribs', 4.00): 0,
-                     ('Cabbage Rolls', 8.00): 0, ('Pizza', 4.00): 0,
-                     ('Paella', 4.00): 0},
-         'Desserts': {('Ice Cream', 500.0): 0, ('Cake', 30.00): 0,
-                      ('Pie', 3.00): 0, ('Pudding', 4.00): 0,
-                      ('Fruit', 4.00): 0, ('Sorbet', 4.00): 0,
-                      ('Torte', 4.00): 0, ('Flan', 4.00): 0,
-                      ('Apple', 4.00): 0},
-         'Drinks': {('Coffee', 4.00): 0, ('Tea', 3.00): 0,
-                    ('Blood of the Innocent', 6.00): 0, ('Pop', 4.00): 0,
-                    ('Wine', 4.00): 0, ('Beer', 4.00): 0,
-                    ('Sake', 4.00): 0, ('Cocoa', 4.00): 0,
-                    ('Evian', 4.00): 0},
-         'Sides': {('Frys', 4.00): 0, ('Salad', 3.00): 0,
-                   ('Bread', 6.00): 0, ('Slaw', 4.00): 0, ('Soup', 4.00): 0,
-                   ('Rice', 4.00): 0, ('Spinach', 4.00): 0,
-                   ('Sauce', 4.00): 0, ('Crab dip', 4.00): 0}}
+
+menus = {'Appetizers': {('Wings', 2.00): 3, ('Cookies', 15.00): 3,
+         ('Spring Rolls', 4.00): 3, ('Rings', 4.00): 3,
+         ('Shrimp bites', 4.00): 3, ('Wontons', 4.00): 3,
+         ('Crab Dip', 4.00): 3, ('Sliders', 4.00): 3,
+         ('Clams', 8.00): 3},
+         'Entrees': {('Salmon', 5.00): 3, ('Steak', 6.00): 3,
+                     ('Meat Tornado', 4.00): 3, ('A Literal Garden', 3.00): 3,
+                     ('Pasta', 4.00): 3, ('Ribs', 4.00): 3,
+                     ('Cabbage Rolls', 8.00): 3, ('Pizza', 4.00): 3,
+                     ('Paella', 4.00): 3},
+         'Desserts': {('Ice Cream', 500.0): 3, ('Cake', 30.00): 3,
+                      ('Pie', 3.00): 3, ('Pudding', 4.00): 3,
+                      ('Fruit', 4.00): 3, ('Sorbet', 4.00): 3,
+                      ('Torte', 4.00): 3, ('Flan', 4.00): 3,
+                      ('Apple', 4.00): 3},
+         'Drinks': {('Coffee', 4.00): 3, ('Tea', 3.00): 3,
+                    ('Blood of the Innocent', 6.00): 3, ('Pop', 4.00): 3,
+                    ('Wine', 4.00): 3, ('Beer', 4.00): 3,
+                    ('Sake', 4.00): 3, ('Cocoa', 4.00): 3,
+                    ('Evian', 4.00): 3},
+         'Sides': {('Frys', 4.00): 3, ('Salad', 3.00): 3,
+                   ('Bread', 6.00): 3, ('Slaw', 4.00): 3, ('Soup', 4.00): 3,
+                   ('Rice', 4.00): 3, ('Spinach', 4.00): 3,
+                   ('Sauce', 4.00): 3, ('Crab dip', 4.00): 3}}
+
+
+class Order:
+    """Class for Order"""
+    def __init__(self):
+        ''' Initialize with uuid ID and empty dict cart'''
+        self.id = str(uuid4())
+        self.cart = {}
+
+    def __len__(self):
+        ''' Number of items in cart'''
+        return len(self.cart)
+
+    def main(self):
+        ''' for loop for order_prompt and user_input_check'''
+        flag = True
+        while flag:
+            user_input = self._order_prompt()
+            flag = self._user_input_check(user_input)
+
+    def add_item(self, item_name, quantity=1):
+        ''' this method adds item into cart '''
+        if not item_check(item_name):
+            return
+        if quantity > 0:
+            if not self._quantity_check(item_name, quantity):
+                return
+        for key, value in menus.items():
+            for tuple_item in value:
+                if item_name == tuple_item[0]:
+                    if tuple_item[0] in self.cart:
+                        self.cart[tuple_item[0]]['quantity'] += quantity
+                    else:
+                        self.cart[tuple_item[0]] = {'price': tuple_item[1],
+                                                    'quantity': quantity}
+                    return_string = '** {} order of {} have been added to your cart.\n\
+                          Your current total is now: ${}'.format(quantity,
+                                                                 item_name,
+                                                                 self.
+                                                                 _subtotal())
+                    return return_string
+
+    def remove_item(self, item_name, num=1):
+        """remove item """
+        for key in self.cart.keys():
+            if item_name in key:
+                if num == self.cart[key]['quantity']:
+                    del self.cart[key]
+                elif num > self.cart[key]['quantity'] or num < 0:
+                    print('Please check your quantity.')
+                    return
+                else:
+                    self.cart[key]['quantity'] -= num
+                rm_str = '{} order of {} is removed.'.format(num, item_name)
+                return rm_str
+
+    def display_order(self):
+        ''' This return receipt as a string'''
+        subtotal = 0.0
+        print('{} {} {} {}'.format('*' * 60, 'Order id: #' + self.id + '\n',
+              'Thank you for visiting the Snakes Cafe!' + '\n', '*' * 60,))
+        for item, info in self.cart.items():
+            item_total = info['price'] * info['quantity']
+            subtotal += item_total
+            item_total = '{0:.2f}'.format(item_total)
+            receipt = '{} {:>2} {:>22}'.format(item, 'x' +
+                                               str(info['quantity']), '$' +
+                                               str(item_total))
+            print(receipt)
+        # sales tax
+        sales_tax = subtotal * 0.101
+        total = subtotal + sales_tax
+        subtotal_string = '{} {:>22}'.format('Subtotal', '$' +
+                                             str(round(subtotal, 2)))
+        sales_tax_string = '{} {:>22}'.format('Sales Tax', '$' +
+                                              str(round(sales_tax, 2)))
+        total_string = '{} {:>22}'.format('Total Due', '$' +
+                                          str(round(total, 2)))
+        receipt_string = '{}\n{}\n{}'.format(subtotal_string, sales_tax_string,
+                                             total_string)
+        print(receipt_string)
+        return receipt_string
+
+    def print_receipt(self):
+        """save the current order as file."""
+        receipt_string = self.display_order()
+        a = ''
+        a += receipt_string
+        with open('receipts/' + self.id + '.txt', 'w') as f:
+            f.write(a)
+
+    def _remove_check(self, user_input):
+        ''' This checks / passes user input'''
+        if ',' in user_input:
+            user_input_item, quantity = user_input.split(', ', 1)
+            if quantity.isdigit():
+                res = self.remove_item(user_input_item, int(quantity))
+                if res:
+                    print(res)
+            else:
+                print('Please enter quantity in number.')
+        else:
+            res = self.remove_item(user_input)
+            if res:
+                print(res)
+
+    def _subtotal(self):
+        ''' This returns subtotal'''
+        subtotal = 0
+        for item, info in self.cart.items():
+            item_total = info['price'] * info['quantity']
+            subtotal += item_total
+        subtotal = '{0:.2f}'.format(subtotal)
+        return subtotal
+
+    def _order_prompt(self):
+        ''' this prints out order prompt and return user_input'''
+        order_prompt = '''
+        What would you like to order?
+        Please enter item name and quantity
+        separated by a comma.
+        Enter quit any time to exit.
+        Enter "remove" if you want to
+        remove an item.'''
+        print('{}\n{}\n{}'.format('*' * 60, order_prompt, '*' * 60))
+        user_input = input('>\t')
+        user_input = user_input.title()
+        return user_input
+
+    def _quantity_check(self, item, qty):
+        ''' This checks validity of order quantity'''
+        num = 0
+        for value in menus.values():
+            for tuple_item in value:
+                if item == tuple_item[0]:
+                    if qty > value[tuple_item]:
+                        print("We don't have that many.")
+                        return False
+                    for key in self.cart.keys():
+                        if item == key:
+                            num = self.cart[item]['quantity']
+                            if qty + num > value[tuple_item]:
+                                print("We don't have that many")
+                                return False
+                            return True
+                    return True
+        return False
+
+    def _user_input_check(self, user_input):
+        if user_input == 'Quit':
+            return False
+        elif user_input == 'Order':
+            self.print_receipt()
+        elif user_input == 'Menu':
+            menu_items()
+        elif user_input == 'Remove':
+            print('''
+            Enter name of item and quantity that
+            you want to remove separated by comma.''')
+            which_item_remove = input('>\t')
+            which_item_remove = which_item_remove.title()
+            self._remove_check(which_item_remove)
+        elif user_input in menus.keys():
+            sub_menu = print_sub_menu(user_input)
+            if sub_menu:
+                print(sub_menu)
+        else:
+            if ',' in user_input:
+                user_input_item, quantity = user_input.split(', ', 1)
+                if quantity.isdigit():
+                    added = self.add_item(user_input_item, int(quantity))
+                    if added:
+                        print(added)
+                else:
+                    print('Please enter number.')
+            else:
+                self.add_item(user_input)
+        return True
 
 
 def menu_welcome():
@@ -60,95 +238,23 @@ def menu_items():
     return menu_string
 
 
-def ordering():
-    """
-    Ask user for order.  Responds based on the user input.
-    if user input is quit - program quits
-    if user input is order - prints out order receipt which includes
-        subtotal, tax and total
-    if user input is remove - removes one of item user removes
-    if user input is menu - prints menu
-    if user input is a category form the menu - prints items
-        in that category.
-
-    """
-    condition = True
-    print(('*' * 40) + '\n' + ('*' * 2) +
-          'What would you like to order?  ' + ('*' * 2) + '\n' +
-          ('*' * 40) + '\n' + 'Enter quit any time to exit')
-    while condition:
-            order = input('>' + '\t')
-            order = order.title()
-            if order.split(' ')[0] == 'Quit':
-                condition = False
-                break
-            elif order.split(' ')[0] == 'Order':
-                print_receipt()
-            elif order.split(' ')[0] == 'Remove':
-                for value in menus.values():
-                    for tuple_item in value.keys():
-                        if order.split(' ')[1] == tuple_item[0]:
-                            value[tuple_item] -= 1
-                print_receipt()
-            elif order.split(' ')[0] == 'Menu':
-                menu_items()
-            elif order.split(' ')[0] in menus.keys():
-                for key, value in menus.items():
-                    if order.split(' ')[0] == key:
-                        for key in value.keys():
-                            print(key[0])
-            else:
-                for value in menus.values():
-                    for tuple_item in value.keys():
-                        if order == tuple_item[0]:
-                            value[tuple_item] += 1
-                            print('** ' + str(value[tuple_item]) +
-                                  ' order of ' + tuple_item[0] +
-                                  ' have been added to your meal **')
-                            sub_total()
-                            print('{} {}'.format('Your current total is now: ',
-                                  '$' + str(sub_total())))
-
-
-def sub_total():
-    """
-    runs subtotal for receipt
-    """
-    total = 0.00
+def item_check(item_name):
+    ''' It checks if item is in menu'''
     for value in menus.values():
-        for tuple_item, count in value.items():
-            total += tuple_item[1] * count
-    return total
+        if item_name in [key[0] for key in value]:
+            return True
+    print("We don't have that item.")
+    return False
 
 
-def print_receipt():
-    """
-    prints receipt when user enters 'order'
-    """
-    subtotal = 0.0
-    print('{} {}'.format('Order ', '#' + str(uuid.uuid4())))
-    for value in menus.values():
-        for tuple_item, count in value.items():
-            if count > 0:
-                item_total = tuple_item[1] * count
-                subtotal += item_total
-                item_total = '{0:.2f}'.format(item_total)
-                receipt = '{} {:>2} {:>22}'.format(tuple_item[0], 'x' +
-                                                   str(count), '$' +
-                                                   str(item_total))
-                print(receipt)
-    # sales tax
-    sales_tax = subtotal * 0.101
-    total = subtotal + sales_tax
-    subtotal_string = '{} {:>22}'.format('Subtotal', '$' +
-                                         str(round(subtotal, 2)))
-    sales_tax_string = '{} {:>22}'.format('Sales Tax', '$' +
-                                          str(round(sales_tax, 2)))
-    total_string = '{} {:>22}'.format('Total Due', '$' + str(round(total, 2)))
-    receipt_string = '{}\n{}\n{}'.format(subtotal_string, sales_tax_string,
-                                         total_string)
-    print(receipt_string)
-    return receipt_string
+def print_sub_menu(user_input):
+    ''' It prints items in category'''
+    a = ''
+    for key, val in menus.items():
+        if user_input == key:
+            for key in val.keys():
+                a += key[0] + '\n'
+            return a
 
 
 def ask_optional_menu():
@@ -163,7 +269,6 @@ def ask_optional_menu():
     If you don't, please type 'No'""")
     user_input = input('>' + '\t')
     answer = user_input.title()
-    # while True:
     if answer == 'Yes':
         ask_file_path()
     elif answer == 'No':
@@ -177,14 +282,22 @@ def ask_file_path():
     global menus
     print('Please provide a file path to menu.csv')
     file_path = input('>' + '\t')
-    with open(file_path, newline='') as menu_csv:
-        your_menu = csv.reader(menu_csv, delimiter=',')
-        custom_menu = {}
-        for row in your_menu:
-            # read out each row and generate menus
-            generate_menu(custom_menu, row)
-        menus = custom_menu
+    if not file_path.endswith('.csv'):
+        print("It's not a csv file.")
         menu_items()
+        return
+    try:
+        with open(file_path, newline='') as menu_csv:
+            your_menu = csv.reader(menu_csv, delimiter=',')
+            custom_menu = {}
+            for row in your_menu:
+                generate_menu(custom_menu, row)
+            menus = custom_menu
+            menu_items()
+    except FileNotFoundError:
+        print('''You file cannot be found.
+Please check your file name.
+''')
 
 
 def generate_menu(custom_menu, arr):
@@ -192,14 +305,23 @@ def generate_menu(custom_menu, arr):
     in dictionary (with nested dict containing tuples) """
     price = float(arr[2])
     qty = float(arr[3])
-    custom_menu[arr[1]] = {(arr[0], price): qty}
+    if arr[1] in custom_menu.keys():
+        print(arr[1])
+        custom_menu[arr[1]][(arr[0], price)] = qty
+    else:
+        custom_menu[arr[1]] = {(arr[0], price): qty}
 
 
-# calling functions
+def main():
+    new_order = Order()
+    menu_welcome()
+    ask_optional_menu()
+    menu_items()
+    new_order.main()
 
 
 if __name__ == '__main__':
-    menu_welcome()
-    ask_optional_menu()
-    # menu_items()
-    ordering()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("Thank you for visiting snakes cafe.")
