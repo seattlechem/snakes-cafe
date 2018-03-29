@@ -13,6 +13,7 @@ def cart_3_wings():
     order_obj.add_item('Wings', 3)
     return order_obj
 
+
 def test_menu_welcome():
     ''' This tests the printout of welcome message '''
     assert snakes_cafe.menu_welcome() == """
@@ -110,7 +111,15 @@ Total Due                  $6.61''' in cart_3_wings.display_order()
 
 
 def test_subtotal(cart_3_wings):
+    ''' This tests validation of subtotal when there are
+    3 wings in the cart '''
     assert cart_3_wings._subtotal() == '6.00'
+
+
+def test_quantity_check(empty_order):
+    ''' This tests if it returns False when checking
+    if 6 Wings can be ordered.'''
+    assert empty_order._quantity_check('Wings', 6) is False
 
 
 
