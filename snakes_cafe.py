@@ -35,7 +35,7 @@ class Order:
         self.cart = {}
 
     def __len__(self):
-        return len(self.cart())
+        return len(self.cart)
 
     def main(self):
         flag = True

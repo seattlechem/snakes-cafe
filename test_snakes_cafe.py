@@ -1,4 +1,10 @@
 import snakes_cafe
+import pytest
+
+
+@pytest.fixture
+def empty_order():
+    return snakes_cafe.Order()
 
 
 def test_menu_welcome():
@@ -72,40 +78,43 @@ Crab dip,               $4.00
 """
 
 
-def test_empty_print_receipt():
-    assert """Subtotal                   $0.0
-Sales Tax                   $0.0
-Total Due                   $0.0""" in snakes_cafe.print_receipt()
+def test_len_order_class(empty_order):
+    assert len(empty_order) == 0
+
+# def test_empty_print_receipt():
+#     assert """Subtotal                   $0.0
+# Sales Tax                   $0.0
+# Total Due                   $0.0""" in snakes_cafe.print_receipt()
 
 
-def test_filled_print_receipt():
-    snakes_cafe.menus['Drinks'][('Coffee', 4.00)] = 2
-    assert """Subtotal                   $8.0
-Sales Tax                  $0.81
-Total Due                  $8.81""" in snakes_cafe.print_receipt()
-    snakes_cafe.menus['Drinks'][('Coffee', 4.00)] = 0
+# def test_filled_print_receipt():
+#     snakes_cafe.menus['Drinks'][('Coffee', 4.00)] = 2
+#     assert """Subtotal                   $8.0
+# Sales Tax                  $0.81
+# Total Due                  $8.81""" in snakes_cafe.print_receipt()
+#     snakes_cafe.menus['Drinks'][('Coffee', 4.00)] = 0
 
 
-def test_empty_sub_total():
-    assert snakes_cafe.sub_total() == 0
+# def test_empty_sub_total():
+#     assert snakes_cafe.sub_total() == 0
 
 
-def test_filled_sub_total():
-    snakes_cafe.menus['Appetizers'][('Wings', 2.00)] = 5
-    assert snakes_cafe.sub_total() == 10.00
-    snakes_cafe.menus['Appetizers'][('Wings', 2.00)] = 0
+# def test_filled_sub_total():
+#     snakes_cafe.menus['Appetizers'][('Wings', 2.00)] = 5
+#     assert snakes_cafe.sub_total() == 10.00
+#     snakes_cafe.menus['Appetizers'][('Wings', 2.00)] = 0
 
 
-def test_generate_menu():
-    custom_menu = {}
-    arr = ['Frys', 'Appetizer', 10, 54]
-    snakes_cafe.generate_menu(custom_menu, arr)
-    assert custom_menu == {'Appetizer': {('Frys', 10): 54}}
+# def test_generate_menu():
+#     custom_menu = {}
+#     arr = ['Frys', 'Appetizer', 10, 54]
+#     snakes_cafe.generate_menu(custom_menu, arr)
+#     assert custom_menu == {'Appetizer': {('Frys', 10): 54}}
 
 
-def test_generate_menu_filled():
-    custom_menu = {'Dessert': {('Flan', 4): 34}}
-    arr = ['Frys', 'Appetizer', 10, 54]
-    snakes_cafe.generate_menu(custom_menu, arr)
-    assert custom_menu == {'Dessert': {('Flan', 4): 34},
-                           'Appetizer': {('Frys', 10): 54}}
+# def test_generate_menu_filled():
+#     custom_menu = {'Dessert': {('Flan', 4): 34}}
+#     arr = ['Frys', 'Appetizer', 10, 54]
+#     snakes_cafe.generate_menu(custom_menu, arr)
+#     assert custom_menu == {'Dessert': {('Flan', 4): 34},
+#                            'Appetizer': {('Frys', 10): 54}}
