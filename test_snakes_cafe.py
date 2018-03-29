@@ -7,6 +7,12 @@ def empty_order():
     return snakes_cafe.Order()
 
 
+@pytest.fixture
+def cart_3_wings():
+    order_obj = snakes_cafe.Order()
+    order_obj.add_item('Wings', 3)
+    return order_obj
+
 def test_menu_welcome():
     ''' This tests the printout of welcome message '''
     assert snakes_cafe.menu_welcome() == """
@@ -87,8 +93,20 @@ def test_add_item(empty_order):
     ''' This tests the printout when adding 3 Wings into cart'''
     assert empty_order.add_item('Wings', 3) == '** 3 order of Wings have been added to your cart.\n\
                           Your current total is now: $6.00'
-    
-    
+
+
+def test_remove_item(cart_3_wings):
+    '''This tests the printout when removing 1 wing from the cart (cart has 3
+       wings before remove is called) '''
+    assert cart_3_wings.remove_item('Wings', 1) == '1 order \
+of Wings is removed.'
+
+
+def test_display_order(cart_3_wings):
+    assert cart_3_wings.display_order() == 'test'
+
+
+
 
 # def test_empty_print_receipt():
 #     assert """Subtotal                   $0.0

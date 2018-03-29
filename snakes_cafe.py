@@ -75,8 +75,8 @@ class Order:
                     return
                 else:
                     self.cart[key]['quantity'] -= num
-                print('{} order of {} is removed.'.format(num, item_name))
-                break
+                rm_str = '{} order of {} is removed.'.format(num, item_name)
+                return rm_str
 
     def display_order(self):
         subtotal = 0.0
@@ -116,11 +116,15 @@ class Order:
         if ',' in user_input:
             user_input_item, quantity = user_input.split(', ', 1)
             if quantity.isdigit():
-                self.remove_item(user_input_item, int(quantity))
+                res = self.remove_item(user_input_item, int(quantity))
+                if res:
+                    print(res)
             else:
                 print('Please enter quantity in number.')
         else:
-            self.remove_item(user_input)
+            res = self.remove_item(user_input)
+            if res:
+                print(res)
 
     def _subtotal(self):
         subtotal = 0
