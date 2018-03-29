@@ -103,7 +103,10 @@ of Wings is removed.'
 
 
 def test_display_order(cart_3_wings):
-    assert cart_3_wings.display_order() == 'test'
+    ''' This tests the prinout when display_order method is invoked when there\
+    are 3 Wings in the cart. It confirms that Total Due is same.'''
+    assert '''
+Total Due                  $6.61''' in cart_3_wings.display_order()
 
 
 
