@@ -227,14 +227,6 @@ def menu_items():
     return menu_string
 
 
-def print_sub_menu(str):
-    for key, value in menus.items():
-        if str == key:
-            for item in value.keys():
-                print(item[0])
-                return item[0]
-
-
 def item_check(item_name):
     for value in menus.values():
         if item_name in [key[0] for key in value]:
